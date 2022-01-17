@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "./contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
+import CenteredContainer from "./CenteredContainer";
 
 export default function UpdateProfile() {
   const emailRef = useRef();
@@ -37,14 +38,14 @@ export default function UpdateProfile() {
     Promise.all(promises)
       .then(() => {
         setMessage("Profile update Successful!");
-        setTimeout(() => naviagte("/"), 2000);
+        setTimeout(() => naviagte("/user"), 2000);
       })
       .catch(() => setError("Failed to update account"))
       .finally(() => setLoading(false));
   }
 
   return (
-    <>
+    <CenteredContainer>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Update Profile</h2>
@@ -83,8 +84,10 @@ export default function UpdateProfile() {
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        <Link to="/">Cancel</Link>
+        <Link to="/user" className="text-decoration-none">
+          Cancel
+        </Link>
       </div>
-    </>
+    </CenteredContainer>
   );
 }
