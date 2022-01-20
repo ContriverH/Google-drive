@@ -9,7 +9,7 @@ export default function Folder({ folder }) {
     <>
       <Button
         as={Link}
-        to={`/folder/${folder.id}`}
+        to={{ pathname: `/folder/${folder.id}`, state: { folder: folder } }}
         variant="outline-dark"
         className="text-truncate w-100"
       >
