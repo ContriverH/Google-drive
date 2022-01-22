@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider } from "../contexts/AuthContext";
 import Signup from "./authentication/Signup";
 import Profile from "./authentication/Profile";
 import Login from "./authentication/Login";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Alert, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import CenteredContainer from "./CenteredContainer";
 
 export default function Profile() {

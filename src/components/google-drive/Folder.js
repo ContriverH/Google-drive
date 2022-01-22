@@ -13,7 +13,11 @@ export default function Folder({ folder }) {
         variant="outline-dark"
         className="text-truncate w-100"
       >
-        <FontAwesomeIcon icon={faFolder} transform="left-5" />
+        <FontAwesomeIcon
+          icon={faFolder}
+          color="orange"
+          style={{ marginRight: ".5rem" }}
+        />
         {folder.name}
       </Button>
     </>
