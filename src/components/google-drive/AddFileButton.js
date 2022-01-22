@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import reactDom from "react-dom";
-// import { ReactDOM } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../contexts/AuthContext";
@@ -76,15 +75,27 @@ export default function AddFileButton({ currentFolder }) {
 
         uploadTask.snapshot.ref
           .getDownloadURL()
-          .then((url) =>
-            database.files.add({
-              url: url,
-              name: file.name,
-              createdAt: database.getCurrentTimestamp(),
-              folderId: currentFolder.id,
-              userId: currentUser.uid,
-            })
-          )
+          .then((url) => {
+            database.files
+              .where("name", "==", file.name)
+              .where("userId", "==", currentUser.uid)
+              .where("folderId", "==", currentFolder.id)
+              .get()
+              .then((existingFiles) => {
+                const existingFile = existingFiles.docs[0];
+                if (existingFile) {
+                  existingFile.ref.update({ url: url });
+                } else {
+                  database.files.add({
+                    url: url,
+                    name: file.name,
+                    createdAt: database.getCurrentTimestamp(),
+                    folderId: currentFolder.id,
+                    userId: currentUser.uid,
+                  });
+                }
+              });
+          })
           .catch((e) => console.log(e));
       }
     );
